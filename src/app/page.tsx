@@ -217,27 +217,33 @@ export default function Home() {
                   </div>
                   <div className="bg-white/80 rounded-lg p-3 border-2 border-[#C8102E]">
                     <p className="text-sm text-[#0A3D2E] mb-2 font-semibold">Your Team Token:</p>
-                    <button
+                    <div 
                       onClick={copyToken}
-                      className={`w-full px-4 py-3 rounded-lg font-mono font-bold text-lg transition-all ${
+                      className={`group relative px-4 py-3 rounded-lg font-mono font-bold text-lg transition-all cursor-pointer select-all ${
                         tokenCopied
                           ? 'bg-gradient-to-r from-[#0F5132] to-[#0A3D2E] text-white'
-                          : 'bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white hover:from-[#8B0000] hover:to-[#C8102E] hover:scale-105'
+                          : 'bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white hover:from-[#8B0000] hover:to-[#C8102E] hover:scale-105 active:scale-95'
                       } shadow-lg`}
                     >
                       {tokenCopied ? (
                         <span className="flex items-center justify-center gap-2">
-                          <span>✓</span>
-                          <span>Copied!</span>
+                          <span className="text-xl">✓</span>
+                          <span>Copied to clipboard!</span>
                         </span>
                       ) : (
                         <span className="flex items-center justify-center gap-2">
-                          <span>📋</span>
-                          <span>{createdTeamToken}</span>
-                          <span className="text-sm opacity-80">(Click to copy)</span>
+                          <span className="text-xl group-hover:animate-bounce">📋</span>
+                          <span className="tracking-wider">{createdTeamToken}</span>
                         </span>
                       )}
-                    </button>
+                    </div>
+                    <p className="text-center mt-2 text-xs text-[#0A3D2E] font-semibold">
+                      {tokenCopied ? (
+                        <span className="text-[#0F5132]">✓ Token copied! Share it with your team</span>
+                      ) : (
+                        <span>👆 Click anywhere on the token to copy</span>
+                      )}
+                    </p>
                   </div>
                   <p className="text-xs text-[#0A3D2E] text-center">
                     Redirecting to team page in a few seconds... 🎄
@@ -369,17 +375,23 @@ export default function Home() {
                 <div>
                   <label className="block text-sm font-semibold text-[#0F5132] mb-2">
                     Team Token <span className="text-[#C8102E]">*</span>
+                    <span className="text-xs text-gray-500 ml-2">(Enter the token from your organizer)</span>
                   </label>
                   <input
                     type="text"
                     value={joinToken}
-                    onChange={(e) => setJoinToken(e.target.value.toUpperCase())}
+                    onChange={(e) => setJoinToken(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
                     required
                     maxLength={10}
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#0F5132] focus:border-[#0F5132] transition-all bg-white uppercase tracking-widest text-center font-mono text-lg font-bold"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#0F5132] focus:border-[#0F5132] transition-all bg-white uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-300"
                     placeholder="ABCD1234XY"
                   />
+                  {joinToken && (
+                    <p className="text-xs text-[#0F5132] mt-1 text-center">
+                      Token: <span className="font-mono font-bold">{joinToken}</span>
+                    </p>
+                  )}
                 </div>
 
                 <div>
