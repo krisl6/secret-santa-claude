@@ -30,7 +30,7 @@
 ### 5. Netlify Configuration
 - [x] `netlify.toml` configured correctly
 - [x] Build command: `npm run build`
-- [x] Publish directory: `.next`
+- [x] Using `@netlify/plugin-nextjs` (no publish directory needed)
 - [x] Node version: `20`
 - [x] Secrets scanner configured for `NEXT_PUBLIC_*` variables
 

@@ -30,7 +30,7 @@
    - Choose your team
    - Site name: (choose a name or press enter for random)
    - Build command: `npm run build` (or use the one in netlify.toml)
-   - Publish directory: `.next`
+   - The `@netlify/plugin-nextjs` handles deployment (no publish directory needed)
 
 4. **Set environment variables**:
    ```bash
@@ -61,7 +61,7 @@
 
 3. **Configure build settings**:
    - Build command: `npm run build`
-   - Publish directory: `.next`
+   - The `@netlify/plugin-nextjs` handles deployment (no publish directory needed)
    - Node version: `20`
 
 4. **Set environment variables** (in Site settings → Environment variables):
