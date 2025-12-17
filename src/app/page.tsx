@@ -28,6 +28,8 @@ export default function Home() {
 
   const [joinToken, setJoinToken] = useState('')
   const [joinName, setJoinName] = useState('')
+  const [createdTeamToken, setCreatedTeamToken] = useState<string | null>(null)
+  const [tokenCopied, setTokenCopied] = useState(false)
 
   const handleCreateTeam = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -56,16 +58,32 @@ export default function Home() {
 
       localStorage.setItem('participantId', data.participant.id)
       localStorage.setItem('teamToken', data.team.token)
+      setCreatedTeamToken(data.team.token)
       setToast({ message: 'Team created successfully! 🎄', type: 'success' })
+      // Delay redirect to allow user to copy token
       setTimeout(() => {
         router.push(`/team/${data.team.token}`)
-      }, 500)
+      }, 5000)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Something went wrong'
       setError(errorMessage)
       setToast({ message: errorMessage, type: 'error' })
     } finally {
       setLoading(false)
+    }
+  }
+
+  const copyToken = async () => {
+    if (createdTeamToken) {
+      try {
+        await navigator.clipboard.writeText(createdTeamToken)
+        setTokenCopied(true)
+        setToast({ message: 'Token copied to clipboard! 📋', type: 'success' })
+        setTimeout(() => setTokenCopied(false), 2000)
+      } catch (err) {
+        console.error('Failed to copy:', err)
+        setToast({ message: 'Failed to copy token', type: 'error' })
+      }
     }
   }
 
@@ -186,6 +204,44 @@ export default function Home() {
                 <div className="flex items-center gap-2">
                   <span className="text-xl">⚠️</span>
                   <span className="font-medium">{error}</span>
+                </div>
+              </div>
+            )}
+
+            {createdTeamToken && (
+              <div className="mb-4 p-4 bg-gradient-to-r from-[#E8F5E9] to-[#FFF8E7] border-2 border-[#0F5132] rounded-xl shadow-md relative z-10 animate-pulse-slow">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">🎉</span>
+                    <span className="font-bold text-[#0F5132]">Team Created Successfully!</span>
+                  </div>
+                  <div className="bg-white/80 rounded-lg p-3 border-2 border-[#C8102E]">
+                    <p className="text-sm text-[#0A3D2E] mb-2 font-semibold">Your Team Token:</p>
+                    <button
+                      onClick={copyToken}
+                      className={`w-full px-4 py-3 rounded-lg font-mono font-bold text-lg transition-all ${
+                        tokenCopied
+                          ? 'bg-gradient-to-r from-[#0F5132] to-[#0A3D2E] text-white'
+                          : 'bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white hover:from-[#8B0000] hover:to-[#C8102E] hover:scale-105'
+                      } shadow-lg`}
+                    >
+                      {tokenCopied ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <span>✓</span>
+                          <span>Copied!</span>
+                        </span>
+                      ) : (
+                        <span className="flex items-center justify-center gap-2">
+                          <span>📋</span>
+                          <span>{createdTeamToken}</span>
+                          <span className="text-sm opacity-80">(Click to copy)</span>
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                  <p className="text-xs text-[#0A3D2E] text-center">
+                    Redirecting to team page in a few seconds... 🎄
+                  </p>
                 </div>
               </div>
             )}
