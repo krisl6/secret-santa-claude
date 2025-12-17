@@ -278,7 +278,7 @@ export default function Home() {
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white"
-                    placeholder="Acme Inc."
+                    placeholder="MonstarX"
                   />
                 </div>
 
