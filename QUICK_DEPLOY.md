@@ -24,8 +24,9 @@ Add these 3 variables:
 
 1. **DATABASE_URL**
    ```
-   postgresql://postgres:AOIe0Yq0wuHakiUZ@db.svfnztjyrswfgzjvgypn.supabase.co:5432/postgres?pgbouncer=true&connection_limit=1
+   postgresql://postgres:[YOUR-PASSWORD]@db.svfnztjyrswfgzjvgypn.supabase.co:5432/postgres?pgbouncer=true&connection_limit=1
    ```
+   **Replace `[YOUR-PASSWORD]` with your actual Supabase database password**
 
 2. **NEXT_PUBLIC_SUPABASE_URL**
    ```
@@ -46,8 +47,8 @@ After first deployment, run this locally:
 
 ```bash
 # Get your Netlify site URL (e.g., https://your-site.netlify.app)
-# Then run migration:
-DATABASE_URL="postgresql://postgres:AOIe0Yq0wuHakiUZ@db.svfnztjyrswfgzjvgypn.supabase.co:5432/postgres?pgbouncer=true&connection_limit=1" npx prisma migrate deploy
+# Then run migration (replace [YOUR-PASSWORD] with your actual password):
+DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.svfnztjyrswfgzjvgypn.supabase.co:5432/postgres?pgbouncer=true&connection_limit=1" npx prisma migrate deploy
 ```
 
 Or use Netlify CLI:
