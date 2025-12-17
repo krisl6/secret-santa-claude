@@ -17,4 +17,20 @@ if (!globalForPrisma.prisma) {
   globalForPrisma.prisma = prisma
 }
 
+// Handle unhandled promise rejections from Prisma
+if (typeof process !== 'undefined') {
+  // Gracefully handle disconnection on process termination
+  const gracefulShutdown = async () => {
+    try {
+      await prisma.$disconnect()
+    } catch (error) {
+      console.error('Error disconnecting Prisma:', error)
+    }
+  }
+
+  process.on('beforeExit', gracefulShutdown)
+  process.on('SIGINT', gracefulShutdown)
+  process.on('SIGTERM', gracefulShutdown)
+}
+
 export default prisma

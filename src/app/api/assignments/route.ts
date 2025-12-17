@@ -124,15 +124,18 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const assignment = await prisma.assignment.findUnique({
-      where: { giverId: participantId },
+    const assignment = await prisma.assignment.findFirst({
+      where: { 
+        giverId: participantId,
+        teamId: team.id,
+      },
       include: {
         giver: { select: { displayName: true } },
         receiver: { select: { displayName: true } },
       },
     })
 
-    if (!assignment || assignment.teamId !== team.id) {
+    if (!assignment) {
       return NextResponse.json(
         { error: 'Assignment not found' },
         { status: 404 }
