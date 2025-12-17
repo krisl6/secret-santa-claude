@@ -9,10 +9,12 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schema   = "public"
+  schemas  = ["public"]
 }
 
 model Team {
+  @@schema("public")
+  
   id           String        @id @default(cuid())
   name         String
   companyName  String?
@@ -29,6 +31,8 @@ model Team {
 }
 
 model Participant {
+  @@schema("public")
+  
   id              String         @id @default(cuid())
   teamId          String
   displayName     String
@@ -45,6 +49,8 @@ model Participant {
 }
 
 model WishlistItem {
+  @@schema("public")
+  
   id            String      @id @default(cuid())
   participantId String
   itemName      String
@@ -56,6 +62,8 @@ model WishlistItem {
 }
 
 model Assignment {
+  @@schema("public")
+  
   id            String      @id @default(cuid())
   teamId        String
   giverId       String      @unique
@@ -73,6 +81,8 @@ model Assignment {
 }
 
 model Exclusion {
+  @@schema("public")
+  
   id                String      @id @default(cuid())
   teamId            String
   excluderId        String
