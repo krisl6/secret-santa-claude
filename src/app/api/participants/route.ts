@@ -69,8 +69,9 @@ export async function DELETE(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error removing participant:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to remove participant'
     return NextResponse.json(
-      { error: 'Failed to remove participant' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }

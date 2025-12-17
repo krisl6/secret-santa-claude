@@ -17,6 +17,8 @@ const mountainsOfChristmas = Mountains_of_Christmas({
   variable: "--font-christmas",
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
+  fallback: ["serif"],
 });
 
 export const metadata: Metadata = {

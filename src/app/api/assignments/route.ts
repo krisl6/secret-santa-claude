@@ -92,8 +92,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ success: true, assignment: updated })
   } catch (error) {
     console.error('Error updating assignment:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update assignment'
     return NextResponse.json(
-      { error: 'Failed to update assignment' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -141,8 +142,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ assignment })
   } catch (error) {
     console.error('Error fetching assignment:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch assignment'
     return NextResponse.json(
-      { error: 'Failed to fetch assignment' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }

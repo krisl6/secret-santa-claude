@@ -21,8 +21,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ wishlistItems })
   } catch (error) {
     console.error('Error fetching wishlist:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch wishlist'
     return NextResponse.json(
-      { error: 'Failed to fetch wishlist' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -72,8 +73,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ wishlistItem })
   } catch (error) {
     console.error('Error creating wishlist item:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create wishlist item'
     return NextResponse.json(
-      { error: 'Failed to create wishlist item' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -122,8 +124,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ wishlistItem: updatedItem })
   } catch (error) {
     console.error('Error updating wishlist item:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update wishlist item'
     return NextResponse.json(
-      { error: 'Failed to update wishlist item' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -169,8 +172,9 @@ export async function DELETE(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error deleting wishlist item:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to delete wishlist item'
     return NextResponse.json(
-      { error: 'Failed to delete wishlist item' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }

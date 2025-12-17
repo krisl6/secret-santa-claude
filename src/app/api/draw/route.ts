@@ -119,8 +119,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error performing draw:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to perform draw'
     return NextResponse.json(
-      { error: 'Failed to perform draw' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }

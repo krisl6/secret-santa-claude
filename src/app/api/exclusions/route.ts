@@ -76,8 +76,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, exclusion })
   } catch (error) {
     console.error('Error creating exclusion:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create exclusion'
     return NextResponse.json(
-      { error: 'Failed to create exclusion' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -118,8 +119,9 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error deleting exclusion:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to delete exclusion'
     return NextResponse.json(
-      { error: 'Failed to delete exclusion' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
@@ -165,8 +167,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ exclusions })
   } catch (error) {
     console.error('Error fetching exclusions:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch exclusions'
     return NextResponse.json(
-      { error: 'Failed to fetch exclusions' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }

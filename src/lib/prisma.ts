@@ -4,7 +4,7 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
-// PrismaClient is attached to the `global` object in development to prevent
+// PrismaClient is attached to the `global` object to prevent
 // exhausting your database connection limit in serverless environments
 export const prisma =
   globalForPrisma.prisma ??
@@ -12,13 +12,9 @@ export const prisma =
     log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
   })
 
-if (process.env.NODE_ENV !== 'production') {
+// In serverless environments, reuse the same Prisma instance
+if (!globalForPrisma.prisma) {
   globalForPrisma.prisma = prisma
 }
-
-// Handle connection errors gracefully
-prisma.$connect().catch((error) => {
-  console.error('Failed to connect to database:', error)
-})
 
 export default prisma

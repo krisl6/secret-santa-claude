@@ -82,8 +82,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error joining team:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to join team'
     return NextResponse.json(
-      { error: 'Failed to join team' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
