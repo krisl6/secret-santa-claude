@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Toast from '@/components/Toast'
+import ChristmasTree from '@/components/ChristmasTree'
 
 const CURRENCIES = [
   { code: 'MYR', symbol: 'RM', name: 'Malaysian Ringgit' },
@@ -105,7 +106,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen relative z-10">
+    <div className="min-h-screen relative z-10 overflow-hidden">
       {toast && (
         <Toast
           message={toast.message}
@@ -113,47 +114,75 @@ export default function Home() {
           onClose={() => setToast(null)}
         />
       )}
-      <div className="container mx-auto px-4 py-16">
+      
+      {/* Animated Christmas Trees */}
+      <ChristmasTree size="medium" position="left" delay={200} />
+      <ChristmasTree size="medium" position="right" delay={400} />
+
+      <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-12">
-          <h1 className="text-6xl md:text-7xl font-christmas font-bold text-[#C8102E] mb-4 drop-shadow-lg">
-            Secret Santa
-          </h1>
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <span className="text-3xl">🎄</span>
-            <p className="text-xl md:text-2xl text-[#0F5132] font-semibold">
+          <div className="flex justify-center items-center gap-3 mb-6">
+            <span className="text-4xl md:text-5xl animate-bounce">🎄</span>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-christmas font-bold text-[#C8102E] drop-shadow-lg bg-gradient-to-r from-[#C8102E] via-[#8B0000] to-[#C8102E] bg-clip-text text-transparent animate-pulse-slow">
+              Secret Santa
+            </h1>
+            <span className="text-4xl md:text-5xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
+          </div>
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <span className="text-2xl md:text-3xl star-decoration">✨</span>
+            <p className="text-xl md:text-2xl lg:text-3xl text-[#0F5132] font-semibold">
               Organize your gift exchange with ease
             </p>
-            <span className="text-3xl">🎁</span>
+            <span className="text-2xl md:text-3xl star-decoration" style={{ animationDelay: '1s' }}>✨</span>
+          </div>
+          <div className="flex justify-center gap-4 text-2xl md:text-3xl mb-4">
+            <span className="animate-bounce" style={{ animationDelay: '0s' }}>🎅</span>
+            <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>🎄</span>
+            <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
+            <span className="animate-bounce" style={{ animationDelay: '0.3s' }}>❄️</span>
+            <span className="animate-bounce" style={{ animationDelay: '0.4s' }}>⭐</span>
           </div>
         </div>
 
-        <div className="max-w-md mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E]">
-          <div className="flex">
+        <div className="max-w-md mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E] relative z-10 transform hover:scale-105 transition-transform duration-300">
+          <div className="flex relative">
             <button
               onClick={() => setActiveTab('create')}
-              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 ${
+              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
                 activeTab === 'create'
                   ? 'bg-[#C8102E] text-white shadow-lg transform scale-105'
                   : 'bg-[#FFE5E5] text-[#8B0000] hover:bg-[#FFD0D0]'
               }`}
             >
+              {activeTab === 'create' && (
+                <span className="absolute top-1 right-2 text-lg animate-bounce">✨</span>
+              )}
               Create Team
             </button>
             <button
               onClick={() => setActiveTab('join')}
-              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 ${
+              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
                 activeTab === 'join'
                   ? 'bg-[#0F5132] text-white shadow-lg transform scale-105'
                   : 'bg-[#E8F5E9] text-[#0A3D2E] hover:bg-[#C8E6C9]'
               }`}
             >
+              {activeTab === 'join' && (
+                <span className="absolute top-1 right-2 text-lg animate-bounce">🎁</span>
+              )}
               Join Team
             </button>
           </div>
 
-          <div className="p-8 bg-gradient-to-br from-white to-[#FFF8E7]">
+          <div className="p-8 bg-gradient-to-br from-white via-[#FFF8E7] to-[#E8F5E9] relative overflow-hidden">
+            {/* Decorative corner elements */}
+            <div className="absolute top-2 left-2 text-2xl opacity-20 animate-twinkle">✨</div>
+            <div className="absolute top-2 right-2 text-2xl opacity-20 animate-twinkle" style={{ animationDelay: '0.5s' }}>⭐</div>
+            <div className="absolute bottom-2 left-2 text-2xl opacity-20 animate-twinkle" style={{ animationDelay: '1s' }}>🎄</div>
+            <div className="absolute bottom-2 right-2 text-2xl opacity-20 animate-twinkle" style={{ animationDelay: '1.5s' }}>🎁</div>
+            
             {error && (
-              <div className="mb-4 p-4 bg-red-50 border-2 border-[#C8102E] text-[#8B0000] rounded-xl shadow-md">
+              <div className="mb-4 p-4 bg-red-50 border-2 border-[#C8102E] text-[#8B0000] rounded-xl shadow-md relative z-10">
                 <div className="flex items-center gap-2">
                   <span className="text-xl">⚠️</span>
                   <span className="font-medium">{error}</span>
@@ -162,7 +191,7 @@ export default function Home() {
             )}
 
             {activeTab === 'create' ? (
-              <form onSubmit={handleCreateTeam} className="space-y-5">
+              <form onSubmit={handleCreateTeam} className="space-y-5 relative z-10">
                 <div>
                   <label className="block text-sm font-semibold text-[#0F5132] mb-2">
                     Team Name <span className="text-[#C8102E]">*</span>
@@ -280,7 +309,7 @@ export default function Home() {
                 </button>
               </form>
             ) : (
-              <form onSubmit={handleJoinTeam} className="space-y-5">
+              <form onSubmit={handleJoinTeam} className="space-y-5 relative z-10">
                 <div>
                   <label className="block text-sm font-semibold text-[#0F5132] mb-2">
                     Team Token <span className="text-[#C8102E]">*</span>

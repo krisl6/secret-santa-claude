@@ -106,3 +106,78 @@ body {
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
 }
+
+/* Christmas Tree Animations */
+@keyframes tree-sway {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(1deg);
+  }
+}
+
+@keyframes tree-sway-delayed {
+  0%, 100% {
+    transform: translateX(-50%) rotate(1deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bounce-slow-delayed {
+  0%, 100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+.animate-tree-sway {
+  animation: tree-sway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-tree-sway-delayed {
+  animation: tree-sway-delayed 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+  transform-origin: bottom center;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-bounce-slow-delayed {
+  animation: bounce-slow-delayed 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
