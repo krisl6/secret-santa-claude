@@ -32,10 +32,11 @@ model Team {
 
 model Participant {
   @@schema("public")
-  
+
   id              String         @id @default(cuid())
   teamId          String
   displayName     String
+  email           String?
   isOrganizer     Boolean        @default(false)
   createdAt       DateTime       @default(now())
   team            Team           @relation(fields: [teamId], references: [id], onDelete: Cascade)

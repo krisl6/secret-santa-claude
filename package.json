@@ -14,7 +14,8 @@
     "next": "16.0.10",
     "prisma": "^6.19.1",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "resend": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

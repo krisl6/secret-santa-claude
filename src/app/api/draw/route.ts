@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { generateAssignments } from '@/lib/utils'
+import { sendDrawCompletedEmailsToAll } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -108,6 +109,29 @@ export async function POST(request: NextRequest) {
         receiver: true,
       },
     })
+
+    // Send email notifications to participants who have email addresses
+    if (process.env.RESEND_API_KEY) {
+      const emailData = finalAssignments
+        .filter((a) => a.giver.email) // Only send to participants with email
+        .map((a) => {
+          const teamUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/team/${team.token}`
+          return {
+            to: a.giver.email!,
+            participantName: a.giver.displayName,
+            teamName: team.name,
+            receiverName: a.receiver.displayName,
+            teamUrl,
+          }
+        })
+
+      if (emailData.length > 0) {
+        // Send emails in the background, don't wait for completion
+        sendDrawCompletedEmailsToAll(emailData).catch((error) => {
+          console.error('Failed to send draw completed emails, but continuing:', error)
+        })
+      }
+    }
 
     return NextResponse.json({
       success: true,

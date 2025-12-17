@@ -18,6 +18,9 @@
 - [x] `DATABASE_URL` - Set in Netlify (with Supabase password)
 - [x] `NEXT_PUBLIC_SUPABASE_URL` - Set in Netlify
 - [x] `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Set in Netlify
+- [ ] `RESEND_API_KEY` - Set in Netlify (for email notifications)
+- [ ] `RESEND_FROM_EMAIL` - (Optional) Custom sender email
+- [ ] `NEXT_PUBLIC_APP_URL` - Set to your Netlify site URL
 - [x] `.env` file not committed to git
 
 ### 4. Code Quality
