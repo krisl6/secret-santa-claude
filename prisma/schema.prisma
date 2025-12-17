@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Team {
+  id           String        @id @default(cuid())
+  name         String
+  companyName  String?
+  eventDate    DateTime
+  token        String        @unique
+  budget       Float?
+  currency     String        @default("MYR")
+  isLocked     Boolean       @default(false)
+  drawComplete Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  participants Participant[]
+  assignments  Assignment[]
+  exclusions   Exclusion[]
+}
+
+model Participant {
+  id              String         @id @default(cuid())
+  teamId          String
+  displayName     String
+  isOrganizer     Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  team            Team           @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  wishlistItems   WishlistItem[]
+  givenAssignment Assignment?    @relation("Giver")
+  receivedFrom    Assignment?    @relation("Receiver")
+  exclusions      Exclusion[]     @relation("Excluder")
+  excludedBy      Exclusion[]     @relation("Excluded")
+
+  @@unique([teamId, displayName])
+}
+
+model WishlistItem {
+  id            String      @id @default(cuid())
+  participantId String
+  itemName      String
+  description   String?
+  link          String?
+  priceRange    String?
+  createdAt     DateTime    @default(now())
+  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+}
+
+model Assignment {
+  id            String      @id @default(cuid())
+  teamId        String
+  giverId       String      @unique
+  receiverId    String      @unique
+  isPurchased   Boolean     @default(false)
+  isReceived    Boolean     @default(false)
+  photoUrl      String?
+  thankYouMessage String?
+  createdAt     DateTime    @default(now())
+  purchasedAt   DateTime?
+  receivedAt    DateTime?
+  team          Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  giver         Participant @relation("Giver", fields: [giverId], references: [id], onDelete: Cascade)
+  receiver      Participant @relation("Receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model Exclusion {
+  id                String      @id @default(cuid())
+  teamId            String
+  excluderId        String
+  excludedId        String
+  createdAt         DateTime    @default(now())
+  team              Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  excluder          Participant @relation("Excluder", fields: [excluderId], references: [id], onDelete: Cascade)
+  excluded          Participant @relation("Excluded", fields: [excludedId], references: [id], onDelete: Cascade)
+
+  @@unique([excluderId, excludedId])
+  @@index([teamId])
+}
