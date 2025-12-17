@@ -182,8 +182,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response)
   } catch (error) {
     console.error('Error fetching team:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch team'
     return NextResponse.json(
-      { error: 'Failed to fetch team' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? String(error) : undefined },
       { status: 500 }
     )
   }
