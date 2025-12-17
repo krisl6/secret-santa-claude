@@ -62,7 +62,12 @@ interface TeamData {
   participants?: Participant[]
   assignments?: Assignment[]
   assignment?: {
+    id: string
     receiver: ReceiverInfo
+    isPurchased?: boolean
+    isReceived?: boolean
+    photoUrl?: string | null
+    thankYouMessage?: string | null
   }
 }
 
@@ -709,7 +714,7 @@ export default function TeamPage() {
                 </div>
 
                 {/* Gift Tracking */}
-                {assignment && (
+                {assignment && participant && (
                   <div className="mt-6">
                     <GiftTracking
                       assignmentId={assignment.id}
@@ -718,8 +723,8 @@ export default function TeamPage() {
                       receiverName={assignment.receiver.displayName}
                       initialIsPurchased={assignment.isPurchased || false}
                       initialIsReceived={assignment.isReceived || false}
-                      initialPhotoUrl={assignment.photoUrl}
-                      initialThankYouMessage={assignment.thankYouMessage}
+                      initialPhotoUrl={assignment.photoUrl || null}
+                      initialThankYouMessage={assignment.thankYouMessage || null}
                       isReceiver={false}
                     />
                   </div>
