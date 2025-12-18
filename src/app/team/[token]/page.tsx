@@ -8,6 +8,7 @@ import Exclusions from '@/components/Exclusions'
 import GiftTracking from '@/components/GiftTracking'
 import Toast from '@/components/Toast'
 import ThemeToggle from '@/components/ThemeToggle'
+import ContextualGuide from '@/components/ContextualGuide'
 
 interface WishlistItem {
   id: string
@@ -930,6 +931,21 @@ export default function TeamPage() {
           </div>
         </div>
       </div>
+
+      {/* Contextual Guide */}
+      <ContextualGuide
+        section={
+          isOrganizer && !team.drawComplete
+            ? 'organizer'
+            : assignment
+            ? 'assignment'
+            : !team.drawComplete
+            ? 'waiting'
+            : 'participant'
+        }
+        isOrganizer={isOrganizer}
+        drawComplete={team.drawComplete}
+      />
     </div>
   )
 }
