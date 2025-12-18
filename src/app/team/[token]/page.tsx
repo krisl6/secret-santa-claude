@@ -388,13 +388,13 @@ export default function TeamPage() {
       )}
       
       {/* Header Bar */}
-      <div className="fixed top-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="fixed top-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between">
         {/* MonstarX Logo */}
         <div className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer" onClick={() => router.push('/')}>
-          <img 
-            src="/monstarx-logo.svg" 
-            alt="MonstarX" 
-            className="h-10 md:h-12 w-auto"
+          <img
+            src="/monstarx-logo.svg"
+            alt="MonstarX"
+            className="h-5 md:h-6 w-auto"
           />
         </div>
         
@@ -441,14 +441,14 @@ export default function TeamPage() {
                 <p className="text-lg text-[#0F5132] font-semibold">{team.companyName}</p>
               )}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-2 space-y-1 sm:space-y-0">
-                <p className="text-[#0A3D2E] flex items-center gap-2">
+                <p className="text-[#0A3D2E] flex items-center gap-2 text-sm sm:text-base">
                   <span>📅</span>
                   <span className="font-medium">Event Date: {eventDate}</span>
                 </p>
                 {team.budget && (
-                  <p className="text-[#0A3D2E] dark:text-gray-200 flex items-center gap-2">
+                  <p className="text-[#0A3D2E] dark:text-gray-200 flex items-center gap-2 flex-shrink-0">
                     <span>💰</span>
-                    <span className="font-bold text-lg text-[#0A3D2E] dark:text-white">Budget: {CURRENCY_SYMBOLS[team.currency] || team.currency}{team.currency === 'JPY' ? team.budget.toFixed(0) : team.budget.toFixed(2)}</span>
+                    <span className="font-bold text-sm sm:text-lg text-[#0A3D2E] dark:text-white whitespace-nowrap">Budget: {CURRENCY_SYMBOLS[team.currency] || team.currency}{team.currency === 'JPY' ? team.budget.toFixed(0) : team.budget.toFixed(2)}</span>
                   </p>
                 )}
               </div>
