@@ -15,7 +15,7 @@ const CURRENCIES = [
 export default function Home() {
   const router = useRouter()
   const dateInputRef = useRef<HTMLInputElement>(null)
-  const [activeTab, setActiveTab] = useState<'create' | 'join'>('create')
+  const [activeTab, setActiveTab] = useState<'create' | 'join' | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null)
@@ -167,37 +167,78 @@ export default function Home() {
 
         <ThemeToggle />
 
-        <div className="max-w-md mx-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E] dark:border-[#FFD700] relative z-10 transform hover:scale-105 transition-transform duration-300">
-          <div className="flex relative">
+        {activeTab === null ? (
+          <div className="max-w-md mx-auto space-y-6">
             <button
               onClick={() => setActiveTab('create')}
-              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
-                activeTab === 'create'
-                  ? 'bg-[#C8102E] text-white shadow-lg transform scale-105'
-                  : 'bg-[#FFE5E5] text-[#8B0000] hover:bg-[#FFD0D0]'
-              }`}
+              className="w-full py-8 bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white font-bold text-2xl rounded-3xl shadow-2xl hover:from-[#8B0000] hover:to-[#C8102E] transition-all duration-300 transform hover:scale-105 active:scale-95 border-4 border-white relative overflow-hidden group"
             >
-              {activeTab === 'create' && (
-                <span className="absolute top-1 right-2 text-lg animate-bounce">✨</span>
-              )}
-              Create Team
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                <span className="text-3xl group-hover:animate-bounce">✨</span>
+                <span>Create Team</span>
+                <span className="text-3xl group-hover:animate-bounce">🎄</span>
+              </span>
             </button>
             <button
               onClick={() => setActiveTab('join')}
-              className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
-                activeTab === 'join'
-                  ? 'bg-[#0F5132] text-white shadow-lg transform scale-105'
-                  : 'bg-[#E8F5E9] text-[#0A3D2E] hover:bg-[#C8E6C9]'
-              }`}
+              className="w-full py-8 bg-gradient-to-r from-[#0F5132] to-[#0A3D2E] text-white font-bold text-2xl rounded-3xl shadow-2xl hover:from-[#0A3D2E] hover:to-[#0F5132] transition-all duration-300 transform hover:scale-105 active:scale-95 border-4 border-white relative overflow-hidden group"
             >
-              {activeTab === 'join' && (
-                <span className="absolute top-1 right-2 text-lg animate-bounce">🎁</span>
-              )}
-              Join Team
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                <span className="text-3xl group-hover:animate-bounce">🎁</span>
+                <span>Join Team</span>
+                <span className="text-3xl group-hover:animate-bounce">⭐</span>
+              </span>
             </button>
           </div>
+        ) : (
+          <div className="max-w-md mx-auto">
+            <button
+              onClick={() => {
+                setActiveTab(null)
+                setError('')
+                setTeamName('')
+                setCompanyName('')
+                setEventDate('')
+                setOrganizerName('')
+                setBudget('')
+                setJoinToken('')
+                setJoinName('')
+              }}
+              className="mb-4 px-4 py-2 bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm text-[#0F5132] dark:text-gray-200 font-semibold rounded-xl shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 border-2 border-[#0F5132] dark:border-gray-500"
+            >
+              ← Back
+            </button>
+            <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E] dark:border-[#FFD700] relative z-10 transform hover:scale-105 transition-transform duration-300">
+              <div className="flex relative">
+                <button
+                  onClick={() => setActiveTab('create')}
+                  className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
+                    activeTab === 'create'
+                      ? 'bg-[#C8102E] text-white shadow-lg transform scale-105'
+                      : 'bg-[#FFE5E5] text-[#8B0000] hover:bg-[#FFD0D0]'
+                  }`}
+                >
+                  {activeTab === 'create' && (
+                    <span className="absolute top-1 right-2 text-lg animate-bounce">✨</span>
+                  )}
+                  Create Team
+                </button>
+                <button
+                  onClick={() => setActiveTab('join')}
+                  className={`flex-1 py-4 text-center font-semibold transition-all duration-300 relative ${
+                    activeTab === 'join'
+                      ? 'bg-[#0F5132] text-white shadow-lg transform scale-105'
+                      : 'bg-[#E8F5E9] text-[#0A3D2E] hover:bg-[#C8E6C9]'
+                  }`}
+                >
+                  {activeTab === 'join' && (
+                    <span className="absolute top-1 right-2 text-lg animate-bounce">🎁</span>
+                  )}
+                  Join Team
+                </button>
+              </div>
 
-          <div className="p-8 bg-gradient-to-br from-white via-[#FFF8E7] to-[#E8F5E9] dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 relative overflow-hidden">
+              <div className="p-8 bg-gradient-to-br from-white via-[#FFF8E7] to-[#E8F5E9] dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 relative overflow-hidden">
             {/* Decorative corner elements */}
             <div className="absolute top-2 left-2 text-2xl opacity-20 animate-twinkle">✨</div>
             <div className="absolute top-2 right-2 text-2xl opacity-20 animate-twinkle" style={{ animationDelay: '0.5s' }}>⭐</div>
@@ -258,7 +299,7 @@ export default function Home() {
             )}
 
             {activeTab === 'create' ? (
-              <form onSubmit={handleCreateTeam} className="space-y-5 relative z-10">
+              <form onSubmit={handleCreateTeam} className="space-y-6 relative z-10">
                 <div>
                   <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
                     Team Name <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
@@ -269,7 +310,7 @@ export default function Home() {
                     onChange={(e) => setTeamName(e.target.value)}
                     required
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-medium"
                     placeholder="Engineering Team"
                   />
                 </div>
@@ -282,7 +323,7 @@ export default function Home() {
                     type="text"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-medium"
                     placeholder="MonstarX"
                   />
                 </div>
@@ -298,7 +339,7 @@ export default function Home() {
                       value={eventDate}
                       onChange={(e) => setEventDate(e.target.value)}
                       required
-                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-medium [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                     />
                     <button
                       type="button"
@@ -336,7 +377,7 @@ export default function Home() {
                         onChange={(e) => setBudget(e.target.value)}
                         min="0"
                         step="10"
-                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 font-semibold placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         placeholder="0"
                       />
                     </div>
@@ -352,7 +393,7 @@ export default function Home() {
                     value={organizerName}
                     onChange={(e) => setOrganizerName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-medium"
                     placeholder="John Doe"
                   />
                 </div>
@@ -376,7 +417,7 @@ export default function Home() {
                 </button>
               </form>
             ) : (
-              <form onSubmit={handleJoinTeam} className="space-y-5 relative z-10">
+              <form onSubmit={handleJoinTeam} className="space-y-6 relative z-10">
                 <div>
                   <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
                     Team Token <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
@@ -389,7 +430,7 @@ export default function Home() {
                     required
                     maxLength={10}
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-300 dark:placeholder:text-gray-500"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-400 dark:placeholder:text-gray-500"
                     placeholder="ABCD1234XY"
                   />
                   {joinToken && (
@@ -408,7 +449,7 @@ export default function Home() {
                     value={joinName}
                     onChange={(e) => setJoinName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-medium"
                     placeholder="Jane Doe"
                   />
                 </div>
@@ -432,8 +473,10 @@ export default function Home() {
                 </button>
               </form>
             )}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
