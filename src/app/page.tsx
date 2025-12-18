@@ -333,7 +333,7 @@ export default function Home() {
                     onChange={(e) => setTeamName(e.target.value)}
                     required
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
                     placeholder="Engineering Team"
                   />
                 </div>
@@ -346,7 +346,7 @@ export default function Home() {
                     type="text"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
                     placeholder="MonstarX"
                   />
                 </div>
@@ -362,7 +362,7 @@ export default function Home() {
                       value={eventDate}
                       onChange={(e) => setEventDate(e.target.value)}
                       required
-                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 font-medium [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                     />
                     <button
                       type="button"
@@ -400,7 +400,7 @@ export default function Home() {
                         onChange={(e) => setBudget(e.target.value)}
                         min="0"
                         step="10"
-                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white dark:bg-gray-800 text-black dark:text-white font-semibold placeholder:text-gray-600 dark:placeholder:text-gray-400"
                         placeholder="0"
                       />
                     </div>
@@ -416,7 +416,7 @@ export default function Home() {
                     value={organizerName}
                     onChange={(e) => setOrganizerName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
                     placeholder="John Doe"
                   />
                 </div>
@@ -453,7 +453,7 @@ export default function Home() {
                     required
                     maxLength={10}
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-600 dark:placeholder:text-gray-400"
                     placeholder="ABCD1234XY"
                   />
                   {joinToken && (
@@ -472,7 +472,7 @@ export default function Home() {
                     value={joinName}
                     onChange={(e) => setJoinName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 font-medium"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
                     placeholder="Jane Doe"
                   />
                 </div>
