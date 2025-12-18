@@ -3,7 +3,6 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Toast from '@/components/Toast'
-import ChristmasTree from '@/components/ChristmasTree'
 import ThemeToggle from '@/components/ThemeToggle'
 
 const CURRENCIES = [
@@ -136,16 +135,40 @@ export default function Home() {
       
       {/* MonstarX Logo */}
       <div className="fixed top-4 left-4 z-40 opacity-70 hover:opacity-100 transition-opacity duration-300">
-        <img 
-          src="/monstarx-logo.svg" 
-          alt="MonstarX" 
+        <img
+          src="/monstarx-logo.svg"
+          alt="MonstarX"
           className="h-10 md:h-12 w-auto"
         />
       </div>
-      
-      {/* Animated Christmas Trees */}
-      <ChristmasTree size="medium" position="left" delay={200} />
-      <ChristmasTree size="medium" position="right" delay={400} />
+
+      {/* Elegant Christmas Background Images */}
+      {/* Top Left Decorative Blob */}
+      <div className="fixed top-0 left-0 w-96 h-96 opacity-20 dark:opacity-10 pointer-events-none z-0">
+        <img
+          src="/unsplash_NFfBlixWJLk.svg"
+          alt=""
+          className="w-full h-full object-cover rounded-full blur-2xl mix-blend-multiply dark:mix-blend-screen"
+        />
+      </div>
+
+      {/* Right Side Decorative Element */}
+      <div className="fixed top-20 right-0 w-[500px] h-[600px] opacity-15 dark:opacity-10 pointer-events-none z-0">
+        <img
+          src="/unsplash_bsSxXkBQTB4.png"
+          alt=""
+          className="w-full h-full object-cover rounded-l-[100px] blur-xl mix-blend-multiply dark:mix-blend-screen"
+        />
+      </div>
+
+      {/* Bottom Center Decorative Accent */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[700px] h-96 opacity-10 dark:opacity-5 pointer-events-none z-0">
+        <img
+          src="/unsplash_ocq7NBmpOYU.svg"
+          alt=""
+          className="w-full h-full object-cover rounded-t-[200px] blur-3xl mix-blend-multiply dark:mix-blend-screen"
+        />
+      </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-12">
