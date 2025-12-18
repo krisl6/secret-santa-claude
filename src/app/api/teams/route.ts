@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { generateToken } from '@/lib/utils'
-import { sendTeamCreatedEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { teamName, companyName, eventDate, organizerName, organizerEmail, budget, currency } = body
+    const { teamName, companyName, eventDate, organizerName, budget, currency } = body
 
     if (!teamName || !eventDate || !organizerName) {
       return NextResponse.json(
@@ -33,7 +32,6 @@ export async function POST(request: NextRequest) {
         participants: {
           create: {
             displayName: organizerName,
-            email: organizerEmail || null,
             isOrganizer: true,
           },
         },
@@ -44,22 +42,6 @@ export async function POST(request: NextRequest) {
     })
 
     const organizer = team.participants[0]
-
-    // Send email notification if email is provided and Resend is configured
-    if (organizerEmail && process.env.RESEND_API_KEY) {
-      const teamUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/team/${token}`
-      await sendTeamCreatedEmail({
-        to: organizerEmail,
-        organizerName,
-        teamName,
-        companyName: companyName || undefined,
-        eventDate,
-        token,
-        teamUrl,
-      }).catch((error) => {
-        console.error('Failed to send team created email, but continuing:', error)
-      })
-    }
 
     return NextResponse.json({
       team: {

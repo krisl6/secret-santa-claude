@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { sendTeamJoinedEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { token, displayName, email } = body
+    const { token, displayName } = body
 
     if (!token || !displayName) {
       return NextResponse.json(
@@ -61,24 +60,8 @@ export async function POST(request: NextRequest) {
       data: {
         teamId: team.id,
         displayName,
-        email: email || null,
       },
     })
-
-    // Send email notification if email is provided and Resend is configured
-    if (email && process.env.RESEND_API_KEY) {
-      const teamUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/team/${token}`
-      await sendTeamJoinedEmail({
-        to: email,
-        participantName: displayName,
-        teamName: team.name,
-        companyName: team.companyName || undefined,
-        eventDate: team.eventDate.toISOString(),
-        teamUrl,
-      }).catch((error) => {
-        console.error('Failed to send team joined email, but continuing:', error)
-      })
-    }
 
     return NextResponse.json({
       team: {
