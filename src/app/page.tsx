@@ -26,8 +26,13 @@ export default function Home() {
   const [budget, setBudget] = useState('')
   const [currency, setCurrency] = useState('MYR')
 
+  const [organizerEmail, setOrganizerEmail] = useState('')
+  const [organizerPassword, setOrganizerPassword] = useState('')
+
   const [joinToken, setJoinToken] = useState('')
   const [joinName, setJoinName] = useState('')
+  const [joinEmail, setJoinEmail] = useState('')
+  const [joinPassword, setJoinPassword] = useState('')
   const [createdTeamToken, setCreatedTeamToken] = useState<string | null>(null)
   const [tokenCopied, setTokenCopied] = useState(false)
 
@@ -45,6 +50,8 @@ export default function Home() {
           companyName: companyName || undefined,
           eventDate,
           organizerName,
+          email: organizerEmail,
+          password: organizerPassword,
           budget: budget || undefined,
           currency,
         }),
@@ -99,6 +106,8 @@ export default function Home() {
         body: JSON.stringify({
           token: joinToken.toUpperCase(),
           displayName: joinName,
+          email: joinEmail,
+          password: joinPassword,
         }),
       })
 
@@ -133,13 +142,28 @@ export default function Home() {
         />
       )}
       
-      {/* MonstarX Logo */}
-      <div className="fixed top-4 left-4 z-40 opacity-70 hover:opacity-100 transition-opacity duration-300">
-        <img
-          src="/monstarx-logo.svg"
-          alt="MonstarX"
-          className="h-10 md:h-12 w-auto"
-        />
+      {/* Header Bar */}
+      <div className="fixed top-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between">
+        {/* MonstarX Logo */}
+        <div className="opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <img
+            src="/monstarx-logo.svg"
+            alt="MonstarX"
+            className="h-10 md:h-12 w-auto"
+          />
+        </div>
+        
+        {/* Right Side: Login + Theme Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => router.push('/login')}
+            className="px-5 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-[#C8102E] dark:text-[#FFD700] font-semibold rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 border-2 border-[#C8102E] dark:border-[#FFD700] flex items-center gap-2"
+          >
+            <span>🔐</span>
+            <span>Login</span>
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Elegant Christmas Background Images */}
@@ -188,8 +212,6 @@ export default function Home() {
           </div>
         </div>
 
-        <ThemeToggle />
-
         {activeTab === null ? (
           <div className="max-w-md mx-auto space-y-6">
             <button
@@ -223,9 +245,13 @@ export default function Home() {
                 setCompanyName('')
                 setEventDate('')
                 setOrganizerName('')
+                setOrganizerEmail('')
+                setOrganizerPassword('')
                 setBudget('')
                 setJoinToken('')
                 setJoinName('')
+                setJoinEmail('')
+                setJoinPassword('')
               }}
               className="mb-4 px-4 py-2 bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm text-[#0F5132] dark:text-gray-200 font-semibold rounded-xl shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 border-2 border-[#0F5132] dark:border-gray-500"
             >
@@ -421,6 +447,36 @@ export default function Home() {
                   />
                 </div>
 
+                <div>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Email <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={organizerEmail}
+                    onChange={(e) => setOrganizerEmail(e.target.value)}
+                    required
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Password <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">(min 6 characters)</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={organizerPassword}
+                    onChange={(e) => setOrganizerPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                    placeholder="••••••••"
+                  />
+                </div>
+
                 <button
                   type="submit"
                   disabled={loading}
@@ -474,6 +530,36 @@ export default function Home() {
                     required
                     className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
                     placeholder="Jane Doe"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Email <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={joinEmail}
+                    onChange={(e) => setJoinEmail(e.target.value)}
+                    required
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                    placeholder="jane@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Password <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">(min 6 characters)</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={joinPassword}
+                    onChange={(e) => setJoinPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                    placeholder="••••••••"
                   />
                 </div>
 

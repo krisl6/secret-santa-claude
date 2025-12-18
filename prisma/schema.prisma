@@ -36,6 +36,8 @@ model Participant {
   id              String         @id @default(cuid())
   teamId          String
   displayName     String
+  email           String?
+  passwordHash    String?
   isOrganizer     Boolean        @default(false)
   createdAt       DateTime       @default(now())
   team            Team           @relation(fields: [teamId], references: [id], onDelete: Cascade)
@@ -46,6 +48,7 @@ model Participant {
   excludedBy      Exclusion[]     @relation("Excluded")
 
   @@unique([teamId, displayName])
+  @@index([email])
 }
 
 model WishlistItem {

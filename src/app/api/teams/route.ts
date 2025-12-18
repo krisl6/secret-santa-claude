@@ -1,15 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { generateToken } from '@/lib/utils'
+import bcrypt from 'bcryptjs'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { teamName, companyName, eventDate, organizerName, budget, currency } = body
+    const { teamName, companyName, eventDate, organizerName, email, password, budget, currency } = body
 
     if (!teamName || !eventDate || !organizerName) {
       return NextResponse.json(
         { error: 'Team name, event date, and organizer name are required' },
+        { status: 400 }
+      )
+    }
+
+    // Require email and password for login capability
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: 'Email and password are required to create an account' },
+        { status: 400 }
+      )
+    }
+
+    if (password.length < 6) {
+      return NextResponse.json(
+        { error: 'Password must be at least 6 characters' },
+        { status: 400 }
+      )
+    }
+
+    // Check if email is already used
+    const existingEmail = await prisma.participant.findFirst({
+      where: { email: email.toLowerCase() },
+    })
+    if (existingEmail) {
+      return NextResponse.json(
+        { error: 'This email is already registered. Please login instead.' },
         { status: 400 }
       )
     }
@@ -20,6 +47,9 @@ export async function POST(request: NextRequest) {
       token = generateToken(10)
       existingTeam = await prisma.team.findUnique({ where: { token } })
     }
+
+    // Hash password
+    const passwordHash = await bcrypt.hash(password, 10)
 
     const team = await prisma.team.create({
       data: {
@@ -32,6 +62,8 @@ export async function POST(request: NextRequest) {
         participants: {
           create: {
             displayName: organizerName,
+            email: email.toLowerCase(),
+            passwordHash,
             isOrganizer: true,
           },
         },
@@ -58,6 +90,7 @@ export async function POST(request: NextRequest) {
       participant: {
         id: organizer.id,
         displayName: organizer.displayName,
+        email: organizer.email,
         isOrganizer: organizer.isOrganizer,
       },
     })

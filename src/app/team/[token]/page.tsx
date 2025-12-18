@@ -387,17 +387,34 @@ export default function TeamPage() {
         />
       )}
       
-      {/* MonstarX Logo */}
-      <div className="fixed top-4 left-4 z-40 opacity-70 hover:opacity-100 transition-opacity duration-300">
-        <img 
-          src="/monstarx-logo.svg" 
-          alt="MonstarX" 
-          className="h-10 md:h-12 w-auto"
-        />
+      {/* Header Bar */}
+      <div className="fixed top-0 left-0 right-0 z-40 px-4 py-3 flex items-center justify-between bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+        {/* MonstarX Logo */}
+        <div className="opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer" onClick={() => router.push('/')}>
+          <img 
+            src="/monstarx-logo.svg" 
+            alt="MonstarX" 
+            className="h-10 md:h-12 w-auto"
+          />
+        </div>
+        
+        {/* Right Side: Logout + Theme Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              localStorage.removeItem('participantId')
+              localStorage.removeItem('teamToken')
+              router.push('/')
+            }}
+            className="px-4 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-[#8B0000] dark:text-[#FFD700] font-semibold rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 border-2 border-[#8B0000] dark:border-[#FFD700] flex items-center gap-2 text-sm"
+          >
+            <span>👋</span>
+            <span>Logout</span>
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
-      
-      <ThemeToggle />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-20">
         {/* Logo/Home Link */}
         <button
           onClick={() => router.push('/')}
