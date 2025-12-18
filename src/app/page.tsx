@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Toast from '@/components/Toast'
 import ChristmasTree from '@/components/ChristmasTree'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const CURRENCIES = [
   { code: 'MYR', symbol: 'RM', name: 'Malaysian Ringgit' },
@@ -133,6 +134,15 @@ export default function Home() {
         />
       )}
       
+      {/* MonstarX Logo */}
+      <div className="fixed top-4 left-4 z-40 opacity-70 hover:opacity-100 transition-opacity duration-300">
+        <img 
+          src="/monstarx-logo.svg" 
+          alt="MonstarX" 
+          className="h-10 md:h-12 w-auto"
+        />
+      </div>
+      
       {/* Animated Christmas Trees */}
       <ChristmasTree size="medium" position="left" delay={200} />
       <ChristmasTree size="medium" position="right" delay={400} />
@@ -141,28 +151,23 @@ export default function Home() {
         <div className="text-center mb-12">
           <div className="flex justify-center items-center gap-3 mb-6">
             <span className="text-4xl md:text-5xl animate-bounce">🎄</span>
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-christmas font-bold text-[#C8102E] drop-shadow-lg bg-gradient-to-r from-[#C8102E] via-[#8B0000] to-[#C8102E] bg-clip-text text-transparent animate-pulse-slow">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-christmas font-bold text-[#C8102E] dark:text-[#FFD700] drop-shadow-lg bg-gradient-to-r from-[#C8102E] via-[#8B0000] to-[#C8102E] dark:from-[#FFD700] dark:via-[#FFA500] dark:to-[#FFD700] bg-clip-text text-transparent animate-pulse-slow">
               Secret Santa
             </h1>
             <span className="text-4xl md:text-5xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
           </div>
           <div className="flex justify-center items-center gap-2 mb-6">
             <span className="text-2xl md:text-3xl star-decoration">✨</span>
-            <p className="text-xl md:text-2xl lg:text-3xl text-[#0F5132] font-semibold">
+            <p className="text-xl md:text-2xl lg:text-3xl text-[#0F5132] dark:text-[#90EE90] font-semibold">
               Organize your gift exchange with ease
             </p>
             <span className="text-2xl md:text-3xl star-decoration" style={{ animationDelay: '1s' }}>✨</span>
           </div>
-          <div className="flex justify-center gap-4 text-2xl md:text-3xl mb-4">
-            <span className="animate-bounce" style={{ animationDelay: '0s' }}>🎅</span>
-            <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>🎄</span>
-            <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
-            <span className="animate-bounce" style={{ animationDelay: '0.3s' }}>❄️</span>
-            <span className="animate-bounce" style={{ animationDelay: '0.4s' }}>⭐</span>
-          </div>
         </div>
 
-        <div className="max-w-md mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E] relative z-10 transform hover:scale-105 transition-transform duration-300">
+        <ThemeToggle />
+
+        <div className="max-w-md mx-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-[#C8102E] dark:border-[#FFD700] relative z-10 transform hover:scale-105 transition-transform duration-300">
           <div className="flex relative">
             <button
               onClick={() => setActiveTab('create')}
@@ -192,7 +197,7 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="p-8 bg-gradient-to-br from-white via-[#FFF8E7] to-[#E8F5E9] relative overflow-hidden">
+          <div className="p-8 bg-gradient-to-br from-white via-[#FFF8E7] to-[#E8F5E9] dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 relative overflow-hidden">
             {/* Decorative corner elements */}
             <div className="absolute top-2 left-2 text-2xl opacity-20 animate-twinkle">✨</div>
             <div className="absolute top-2 right-2 text-2xl opacity-20 animate-twinkle" style={{ animationDelay: '0.5s' }}>⭐</div>
@@ -255,8 +260,8 @@ export default function Home() {
             {activeTab === 'create' ? (
               <form onSubmit={handleCreateTeam} className="space-y-5 relative z-10">
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Team Name <span className="text-[#C8102E]">*</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Team Name <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                   </label>
                   <input
                     type="text"
@@ -264,27 +269,27 @@ export default function Home() {
                     onChange={(e) => setTeamName(e.target.value)}
                     required
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     placeholder="Engineering Team"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Company Name <span className="text-gray-500 text-xs">(optional)</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Company Name <span className="text-gray-500 dark:text-gray-400 text-xs">(optional)</span>
                   </label>
                   <input
                     type="text"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     placeholder="MonstarX"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Event Date <span className="text-[#C8102E]">*</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Event Date <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -293,7 +298,7 @@ export default function Home() {
                       value={eventDate}
                       onChange={(e) => setEventDate(e.target.value)}
                       required
-                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                     />
                     <button
                       type="button"
@@ -306,14 +311,14 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Budget <span className="text-gray-500 text-xs">(optional)</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Budget <span className="text-gray-500 dark:text-gray-400 text-xs">(optional)</span>
                   </label>
                   <div className="flex gap-2">
                     <select
                       value={currency}
                       onChange={(e) => setCurrency(e.target.value)}
-                      className="px-3 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white font-semibold text-[#0F5132]"
+                      className="px-3 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 font-semibold text-[#0F5132] dark:text-gray-200"
                     >
                       {CURRENCIES.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -322,7 +327,7 @@ export default function Home() {
                       ))}
                     </select>
                     <div className="relative flex-1">
-                      <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#0F5132] font-bold">
+                      <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#0A3D2E] dark:text-gray-200 font-bold">
                         {CURRENCIES.find(c => c.code === currency)?.symbol}
                       </span>
                       <input
@@ -331,7 +336,7 @@ export default function Home() {
                         onChange={(e) => setBudget(e.target.value)}
                         min="0"
                         step="10"
-                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white"
+                        className="w-full pl-10 pr-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         placeholder="0"
                       />
                     </div>
@@ -339,15 +344,15 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Your Name <span className="text-[#C8102E]">*</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Your Name <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                   </label>
                   <input
                     type="text"
                     value={organizerName}
                     onChange={(e) => setOrganizerName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all bg-white"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     placeholder="John Doe"
                   />
                 </div>
@@ -373,9 +378,9 @@ export default function Home() {
             ) : (
               <form onSubmit={handleJoinTeam} className="space-y-5 relative z-10">
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Team Token <span className="text-[#C8102E]">*</span>
-                    <span className="text-xs text-gray-500 ml-2">(Enter the token from your organizer)</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Team Token <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">(Enter the token from your organizer)</span>
                   </label>
                   <input
                     type="text"
@@ -384,26 +389,26 @@ export default function Home() {
                     required
                     maxLength={10}
                     autoFocus
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#0F5132] focus:border-[#0F5132] transition-all bg-white uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-300"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 uppercase tracking-widest text-center font-mono text-lg font-bold placeholder:text-gray-300 dark:placeholder:text-gray-500"
                     placeholder="ABCD1234XY"
                   />
                   {joinToken && (
-                    <p className="text-xs text-[#0F5132] mt-1 text-center">
+                    <p className="text-xs text-[#0F5132] dark:text-gray-300 mt-1 text-center">
                       Token: <span className="font-mono font-bold">{joinToken}</span>
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0F5132] mb-2">
-                    Your Name <span className="text-[#C8102E]">*</span>
+                  <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
+                    Your Name <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                   </label>
                   <input
                     type="text"
                     value={joinName}
                     onChange={(e) => setJoinName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] rounded-xl focus:ring-2 focus:ring-[#0F5132] focus:border-[#0F5132] transition-all bg-white"
+                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     placeholder="Jane Doe"
                   />
                 </div>

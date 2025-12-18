@@ -7,6 +7,7 @@ import ShareTeam from '@/components/ShareTeam'
 import Exclusions from '@/components/Exclusions'
 import GiftTracking from '@/components/GiftTracking'
 import Toast from '@/components/Toast'
+import ThemeToggle from '@/components/ThemeToggle'
 
 interface WishlistItem {
   id: string
@@ -385,6 +386,17 @@ export default function TeamPage() {
           onClose={() => setToast(null)}
         />
       )}
+      
+      {/* MonstarX Logo */}
+      <div className="fixed top-4 left-4 z-40 opacity-70 hover:opacity-100 transition-opacity duration-300">
+        <img 
+          src="/monstarx-logo.svg" 
+          alt="MonstarX" 
+          className="h-10 md:h-12 w-auto"
+        />
+      </div>
+      
+      <ThemeToggle />
       <div className="container mx-auto px-4 py-8">
         {/* Logo/Home Link */}
         <button
@@ -417,9 +429,9 @@ export default function TeamPage() {
                   <span className="font-medium">Event Date: {eventDate}</span>
                 </p>
                 {team.budget && (
-                  <p className="text-[#0A3D2E] flex items-center gap-2">
+                  <p className="text-[#0A3D2E] dark:text-gray-200 flex items-center gap-2">
                     <span>💰</span>
-                    <span className="font-bold text-lg">Budget: {CURRENCY_SYMBOLS[team.currency] || team.currency}{team.currency === 'JPY' ? team.budget.toFixed(0) : team.budget.toFixed(2)}</span>
+                    <span className="font-bold text-lg text-[#0A3D2E] dark:text-white">Budget: {CURRENCY_SYMBOLS[team.currency] || team.currency}{team.currency === 'JPY' ? team.budget.toFixed(0) : team.budget.toFixed(2)}</span>
                   </p>
                 )}
               </div>
