@@ -97,7 +97,7 @@ export default function YukiChatbot() {
           className="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white rounded-full p-4 shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center gap-2 group"
           aria-label="Open Yuki Chatbot"
         >
-          <span className="text-3xl">🎁</span>
+          <span className="text-3xl">👩‍🎄</span>
           <span className="hidden group-hover:inline-block font-semibold pr-2 animate-fade-in">
             Chat with Yuki
           </span>
@@ -110,7 +110,7 @@ export default function YukiChatbot() {
           {/* Header */}
           <div className="bg-gradient-to-r from-[#C8102E] to-[#8B0000] text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🎁</span>
+              <span className="text-2xl">👩‍🎄</span>
               <div>
                 <h3 className="font-bold text-lg">Yuki</h3>
                 <p className="text-xs opacity-90">Christmas Wishlist Stylist</p>
@@ -155,7 +155,7 @@ export default function YukiChatbot() {
                 >
                   {message.role === 'assistant' && (
                     <div className="flex items-center gap-1 mb-1">
-                      <span className="text-sm">🎁</span>
+                      <span className="text-sm">👩‍🎄</span>
                       <span className="text-xs font-semibold text-[#C8102E]">Yuki</span>
                     </div>
                   )}
