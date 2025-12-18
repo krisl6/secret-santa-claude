@@ -505,12 +505,12 @@ export default function TeamPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column - Wishlist */}
           {participant && (
-            <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border-4 border-[#0F5132]">
-              <h2 className="text-3xl font-christmas font-bold text-[#0F5132] mb-4 flex items-center gap-2">
+            <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border-4 border-[#0F5132] dark:border-[#90EE90]">
+              <h2 className="text-3xl font-christmas font-bold text-[#0F5132] dark:text-[#90EE90] mb-4 flex items-center gap-2">
                 <span>🎁</span>
                 Your Wishlist
               </h2>
-              <p className="text-[#0A3D2E] mb-4 font-medium">
+              <p className="text-[#0A3D2E] dark:text-gray-200 mb-4 font-medium">
                 Add 1-3 items you&apos;d like to receive. Your Secret Santa will see these!
               </p>
 
@@ -519,7 +519,7 @@ export default function TeamPage() {
                 {participant.wishlistItems.map((item) => (
                   <div
                     key={item.id}
-                    className="border-2 border-[#E8F5E9] rounded-xl p-4 bg-gradient-to-br from-white to-[#FFF8E7] hover:shadow-lg transition-all"
+                    className="border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl p-4 bg-gradient-to-br from-white to-[#FFF8E7] dark:from-gray-800 dark:to-gray-700 hover:shadow-lg transition-all"
                   >
                     {editingItem?.id === item.id ? (
                       <form onSubmit={handleUpdateWishlistItem} className="space-y-3">
@@ -580,11 +580,11 @@ export default function TeamPage() {
                       <>
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <h3 className="font-bold text-[#0F5132] text-lg">
+                            <h3 className="font-bold text-[#0F5132] dark:text-[#90EE90] text-lg">
                               {item.itemName}
                             </h3>
                             {item.description && (
-                              <p className="text-[#0A3D2E] text-sm mt-1">
+                              <p className="text-[#0A3D2E] dark:text-gray-200 text-sm mt-1">
                                 {item.description}
                               </p>
                             )}
@@ -593,13 +593,13 @@ export default function TeamPage() {
                                 href={item.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[#C8102E] hover:text-[#8B0000] hover:underline text-sm mt-1 inline-block font-semibold"
+                                className="text-[#C8102E] dark:text-[#FFD700] hover:text-[#8B0000] dark:hover:text-[#FFA500] hover:underline text-sm mt-1 inline-block font-semibold"
                               >
                                 🔗 View Link
                               </a>
                             )}
                             {item.priceRange && (
-                              <p className="text-[#0F5132] text-sm mt-1 font-semibold">
+                              <p className="text-[#0F5132] dark:text-[#90EE90] text-sm mt-1 font-semibold">
                                 💰 {item.priceRange}
                               </p>
                             )}
@@ -627,8 +627,8 @@ export default function TeamPage() {
 
               {/* Add new item form */}
               {participant.wishlistItems.length < 3 && (
-                <form onSubmit={handleAddWishlistItem} className="space-y-3 border-t-2 border-[#E8F5E9] pt-4">
-                  <h3 className="font-bold text-[#0F5132] text-xl">Add Item</h3>
+                <form onSubmit={handleAddWishlistItem} className="space-y-3 border-t-2 border-[#E8F5E9] dark:border-gray-600 pt-4">
+                  <h3 className="font-bold text-[#0F5132] dark:text-[#90EE90] text-xl">Add Item</h3>
                   <input
                     type="text"
                     value={newItem.itemName}
@@ -699,27 +699,27 @@ export default function TeamPage() {
                   <span>🎅</span>
                   Your Secret Santa Assignment
                 </h2>
-                <div className="bg-gradient-to-r from-[#E8F5E9] to-[#FFF8E7] border-4 border-[#0F5132] rounded-xl p-6 mb-6">
-                  <p className="text-[#0A3D2E] mb-2 font-semibold text-lg">You are gifting:</p>
-                  <p className="text-4xl font-christmas font-bold text-[#0F5132]">
+                <div className="bg-gradient-to-r from-[#E8F5E9] to-[#FFF8E7] dark:from-gray-700 dark:to-gray-800 border-4 border-[#0F5132] dark:border-[#90EE90] rounded-xl p-6 mb-6">
+                  <p className="text-[#0A3D2E] dark:text-gray-200 mb-2 font-semibold text-lg">You are gifting:</p>
+                  <p className="text-4xl font-christmas font-bold text-[#0F5132] dark:text-[#90EE90]">
                     {assignment.receiver.displayName}
                   </p>
                 </div>
 
-                <h3 className="font-bold text-[#0F5132] mt-6 mb-3 text-xl">
+                <h3 className="font-bold text-[#0F5132] dark:text-[#90EE90] mt-6 mb-3 text-xl">
                   Their Wishlist:
                 </h3>
                 <div className="space-y-3">
                   {assignment.receiver.wishlistItems.map((item) => (
                     <div
                       key={item.id}
-                      className="border-2 border-[#E8F5E9] rounded-xl p-4 bg-gradient-to-br from-white to-[#FFF8E7] hover:shadow-lg transition-all"
+                      className="border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl p-4 bg-gradient-to-br from-white to-[#FFF8E7] dark:from-gray-800 dark:to-gray-700 hover:shadow-lg transition-all"
                     >
-                      <h4 className="font-bold text-[#0F5132] text-lg">
+                      <h4 className="font-bold text-[#0F5132] dark:text-[#90EE90] text-lg">
                         {item.itemName}
                       </h4>
                       {item.description && (
-                        <p className="text-[#0A3D2E] text-sm mt-1">
+                        <p className="text-[#0A3D2E] dark:text-gray-200 text-sm mt-1">
                           {item.description}
                         </p>
                       )}
@@ -728,13 +728,13 @@ export default function TeamPage() {
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#C8102E] hover:text-[#8B0000] hover:underline text-sm mt-1 inline-block font-semibold"
+                          className="text-[#C8102E] dark:text-[#FFD700] hover:text-[#8B0000] dark:hover:text-[#FFA500] hover:underline text-sm mt-1 inline-block font-semibold"
                         >
                           🔗 View Link
                         </a>
                       )}
                       {item.priceRange && (
-                        <p className="text-[#0F5132] text-sm mt-1 font-semibold">
+                        <p className="text-[#0F5132] dark:text-[#90EE90] text-sm mt-1 font-semibold">
                           💰 {item.priceRange}
                         </p>
                       )}

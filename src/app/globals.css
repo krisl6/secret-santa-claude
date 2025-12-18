@@ -186,3 +186,38 @@ body {
   animation: pulse-slow 3s ease-in-out infinite;
 }
 
+input,
+textarea,
+select {
+  color: #2d2d2d !important;
+  background-color: #ffffff;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+  color: #4a4a4a !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode overrides */
+.dark input,
+.dark textarea,
+.dark select {
+  color: #2d2d2d !important;
+  background-color: #ffffff;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #4a4a4a !important;
+  opacity: 1 !important;
+}
+
+/* Focus state (nice but subtle) */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--christmas-green);
+}
