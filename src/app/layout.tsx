@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Mountains_of_Christmas } from "next/font/google";
 import "./globals.css";
 import Snowflakes from "@/components/Snowflakes";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import YukiChatbot from "@/components/YukiChatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,12 +34,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${mountainsOfChristmas.variable} antialiased`}
       >
-        <Snowflakes />
-        {children}
+        <ThemeProvider>
+          <Snowflakes />
+          {children}
+          <YukiChatbot />
+        </ThemeProvider>
       </body>
     </html>
   );
