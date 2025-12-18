@@ -13,6 +13,7 @@ export default function LoginPage() {
 
   const [identifier, setIdentifier] = useState('') // Username or email
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -147,14 +148,27 @@ export default function LoginPage() {
                   <label className="block text-sm font-semibold text-[#0F5132] dark:text-gray-200 mb-2">
                     Password <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                   </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
-                    placeholder="Enter your password"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                      placeholder="Enter your password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                    >
+                      {showPassword ? (
+                        <span className="text-xl">👁️</span>
+                      ) : (
+                        <span className="text-xl">👁️‍🗨️</span>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 <button

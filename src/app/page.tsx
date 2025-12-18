@@ -28,11 +28,13 @@ export default function Home() {
 
   const [organizerEmail, setOrganizerEmail] = useState('')
   const [organizerPassword, setOrganizerPassword] = useState('')
+  const [showOrganizerPassword, setShowOrganizerPassword] = useState(false)
 
   const [joinToken, setJoinToken] = useState('')
   const [joinName, setJoinName] = useState('')
   const [joinEmail, setJoinEmail] = useState('')
   const [joinPassword, setJoinPassword] = useState('')
+  const [showJoinPassword, setShowJoinPassword] = useState(false)
   const [createdTeamToken, setCreatedTeamToken] = useState<string | null>(null)
   const [tokenCopied, setTokenCopied] = useState(false)
 
@@ -466,15 +468,28 @@ export default function Home() {
                     Password <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">(min 6 characters)</span>
                   </label>
-                  <input
-                    type="password"
-                    value={organizerPassword}
-                    onChange={(e) => setOrganizerPassword(e.target.value)}
-                    required
-                    minLength={6}
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
-                    placeholder="••••••••"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showOrganizerPassword ? "text" : "password"}
+                      value={organizerPassword}
+                      onChange={(e) => setOrganizerPassword(e.target.value)}
+                      required
+                      minLength={6}
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#C8102E] dark:focus:ring-[#FFD700] focus:border-[#C8102E] dark:focus:border-[#FFD700] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowOrganizerPassword(!showOrganizerPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                    >
+                      {showOrganizerPassword ? (
+                        <span className="text-xl">👁️</span>
+                      ) : (
+                        <span className="text-xl">👁️‍🗨️</span>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 <button
@@ -552,15 +567,28 @@ export default function Home() {
                     Password <span className="text-[#C8102E] dark:text-[#FFD700]">*</span>
                     <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">(min 6 characters)</span>
                   </label>
-                  <input
-                    type="password"
-                    value={joinPassword}
-                    onChange={(e) => setJoinPassword(e.target.value)}
-                    required
-                    minLength={6}
-                    className="w-full px-4 py-3 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
-                    placeholder="••••••••"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showJoinPassword ? "text" : "password"}
+                      value={joinPassword}
+                      onChange={(e) => setJoinPassword(e.target.value)}
+                      required
+                      minLength={6}
+                      className="w-full px-4 py-3 pr-12 border-2 border-[#E8F5E9] dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#0F5132] dark:focus:ring-[#90EE90] focus:border-[#0F5132] dark:focus:border-[#90EE90] transition-all bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-600 dark:placeholder:text-gray-400 font-medium"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowJoinPassword(!showJoinPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                    >
+                      {showJoinPassword ? (
+                        <span className="text-xl">👁️</span>
+                      ) : (
+                        <span className="text-xl">👁️‍🗨️</span>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 <button
